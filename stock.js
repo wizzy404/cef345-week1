@@ -28,16 +28,18 @@ function profitPerUnit(arr) {
 }
 
 profitPerUnit(products);
-function profitPerUnit(arr) {
-  let highest = arr[0];
-  for (const p of arr) {
-    const currentProfit = p.sell - p.buy;
-    const highestProfit = highest.sell - highest.buy;
-    if (currentProfit > highestProfit) {
-      highest = p;
-    }
-  }
-  console.log(`Product with highest profit per unit: ${highest.name} (${highest.sell - highest.buy} XAF profit)`);
+
+
+function getOutOfStock(arr) {
+  return arr.filter(p => p.qty === 0);
 }
 
-profitPerUnit(products);
+console.log("Out of stock products:");
+const outOfStock = getOutOfStock(products);
+
+const totalSellValue = products.reduce((total, p) => total + p.qty * p.sell, 0);
+console.log(`Total stock value at selling price: ${totalSellValue} XAF`);
+
+const totalPotentialProfit = products.reduce((total, p) => total + p.qty * (p.sell - p.buy), 0);
+console.log(`Total profitMami Ngum will make if she sold everything: ${totalPotentialProfit} XAF`);
+
